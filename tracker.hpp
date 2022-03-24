@@ -14,12 +14,12 @@ public:
     std::vector<cv::Point2f> calculate_centers(cv::Mat src, 
         std::vector<cv::Vec4i>& hierarchy,
         std::vector<std::vector<cv::Point>>& contours,
-        bool show_bw=0);
+        bool show_bw=0) const;
     std::vector<float> calc_dists(
-        cv::Point2f p, const std::vector<cv::Point2f>& points);
-    int find_min(int i, 
+        cv::Point2f p, const std::vector<cv::Point2f>& points) const;
+    int find_min (int i, 
         std::vector<cv::Point2f> new_points,
-        std::vector<cv::Point2f> old_points);
+        std::vector<cv::Point2f> old_points) const;
 
     void update(cv::Mat img);
 
@@ -62,7 +62,7 @@ cv::Scalar Tracker::get_color(int i)
 
 
 std::vector<float> Tracker::calc_dists(
-    cv::Point2f p, const std::vector<cv::Point2f>& points)
+    cv::Point2f p, const std::vector<cv::Point2f>& points) const
 {
     std::vector<float> distances(points.size());
     
@@ -77,7 +77,7 @@ std::vector<float> Tracker::calc_dists(
 std::vector<cv::Point2f> Tracker::calculate_centers(cv::Mat src, 
     std::vector<cv::Vec4i>& hierarchy,
     std::vector<std::vector<cv::Point>>& contours,
-    bool show_bw)
+    bool show_bw) const
 {
    
     // Create binary image from source image
@@ -129,7 +129,7 @@ std::vector<cv::Point2f> Tracker::calculate_centers(cv::Mat src, bool show_bw)
 
 int Tracker::find_min(int i, 
         std::vector<cv::Point2f> new_points,
-        std::vector<cv::Point2f> old_points)
+        std::vector<cv::Point2f> old_points) const
 {
     if (new_points.empty() || old_points.empty()) return -1;
     
